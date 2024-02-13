@@ -1,0 +1,202 @@
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 8
+Server version: 8.0.34 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2023, Oracle and/or its affiliates.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mydata             |
+| mydb               |
+| mysql              |
+| performance_schema |
+| southwind          |
+| sys                |
++--------------------+
+7 rows in set (0.15 sec)
+
+mysql> use mysql;
+Database changed
+mysql> use mydata;
+Database changed
+mysql> show tables;
++------------------+
+| Tables_in_mydata |
++------------------+
+| student          |
++------------------+
+1 row in set (0.04 sec)
+
+mysql> select * from student;
+Empty set (0.06 sec)
+
+mysql> drop student from mydata;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'student from mydata' at line 1
+mysql> drop table student;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> create table product(PRO_ID int not null primary key auto_increment,PRO_NAME varchar(50),PRO_PRICE float,PRO_COM int;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> create table product(PRO_ID int not null primary key auto_increment,PRO_NAME varchar(50),PRO_PRICE float,PRO_COM int);
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> describe product;
++-----------+-------------+------+-----+---------+----------------+
+| Field     | Type        | Null | Key | Default | Extra          |
++-----------+-------------+------+-----+---------+----------------+
+| PRO_ID    | int         | NO   | PRI | NULL    | auto_increment |
+| PRO_NAME  | varchar(50) | YES  |     | NULL    |                |
+| PRO_PRICE | float       | YES  |     | NULL    |                |
+| PRO_COM   | int         | YES  |     | NULL    |                |
++-----------+-------------+------+-----+---------+----------------+
+4 rows in set (0.01 sec)
+
+mysql> insert into product(PRO_ID,PRO_NAME,PRO_PRICE,PRO_COM) value(101,"Mother Board",3200.00,15);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product(PRO_ID,PRO_NAME,PRO_PRICE,PRO_COM) value(102,"Key Bord",450.00,16);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product(PRO_ID,PRO_NAME,PRO_PRICE,PRO_COM) value(103,"Zip Drive",250.00,14);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product(PRO_ID,PRO_NAME,PRO_PRICE,PRO_COM) value(104,"Speaker",550,16);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product(PRO_ID,PRO_NAME,PRO_PRICE,PRO_COM) value(105,"Monitoe",5000,11);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product(PRO_ID,PRO_NAME,PRO_PRICE,PRO_COM) value(106,"DVD Drive",900,12);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product(PRO_ID,PRO_NAME,PRO_PRICE,PRO_COM) value(107,"Printer",2600,13);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product(PRO_ID,PRO_NAME,PRO_PRICE,PRO_COM) value(108,"Refill cartridge",350,13);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into product(PRO_ID,PRO_NAME,PRO_PRICE,PRO_COM) value(109,"MOUSE",250,12);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from product;
++--------+------------------+-----------+---------+
+| PRO_ID | PRO_NAME         | PRO_PRICE | PRO_COM |
++--------+------------------+-----------+---------+
+|    101 | Mother Board     |      3200 |      15 |
+|    102 | Key Bord         |       450 |      16 |
+|    103 | Zip Drive        |       250 |      14 |
+|    104 | Speaker          |       550 |      16 |
+|    105 | Monitoe          |      5000 |      11 |
+|    106 | DVD Drive        |       900 |      12 |
+|    107 | Printer          |      2600 |      13 |
+|    108 | Refill cartridge |       350 |      13 |
+|    109 | MOUSE            |       250 |      12 |
++--------+------------------+-----------+---------+
+9 rows in set (0.00 sec)
+
+mysql> select * from product where PRO_PRICE > 250 and PRO_NAME;
+Empty set, 7 warnings (0.01 sec)
+
+mysql> select * from product where PRO_PRICE > 250 ;
++--------+------------------+-----------+---------+
+| PRO_ID | PRO_NAME         | PRO_PRICE | PRO_COM |
++--------+------------------+-----------+---------+
+|    101 | Mother Board     |      3200 |      15 |
+|    102 | Key Bord         |       450 |      16 |
+|    104 | Speaker          |       550 |      16 |
+|    105 | Monitoe          |      5000 |      11 |
+|    106 | DVD Drive        |       900 |      12 |
+|    107 | Printer          |      2600 |      13 |
+|    108 | Refill cartridge |       350 |      13 |
++--------+------------------+-----------+---------+
+7 rows in set (0.00 sec)
+
+mysql> select * from product where PRO_PRICE > 250 and return PRO_NAME and PRO_PRICE;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'return PRO_NAME and PRO_PRICE' at line 1
+mysql> select lower(PRO_PRICE) from product;
++------------------+
+| lower(PRO_PRICE) |
++------------------+
+| 3200             |
+| 450              |
+| 250              |
+| 550              |
+| 5000             |
+| 900              |
+| 2600             |
+| 350              |
+| 250              |
++------------------+
+9 rows in set (0.00 sec)
+
+mysql> select * from product;
++--------+------------------+-----------+---------+
+| PRO_ID | PRO_NAME         | PRO_PRICE | PRO_COM |
++--------+------------------+-----------+---------+
+|    101 | Mother Board     |      3200 |      15 |
+|    102 | Key Bord         |       450 |      16 |
+|    103 | Zip Drive        |       250 |      14 |
+|    104 | Speaker          |       550 |      16 |
+|    105 | Monitoe          |      5000 |      11 |
+|    106 | DVD Drive        |       900 |      12 |
+|    107 | Printer          |      2600 |      13 |
+|    108 | Refill cartridge |       350 |      13 |
+|    109 | MOUSE            |       250 |      12 |
++--------+------------------+-----------+---------+
+9 rows in set (0.13 sec)
+
+mysql> select PRO_NAME,PRO_PRICE from product where PRO_PRICE >= 250 order by PRO_PRICE desc,PRO_NAME asc;
++------------------+-----------+
+| PRO_NAME         | PRO_PRICE |
++------------------+-----------+
+| Monitoe          |      5000 |
+| Mother Board     |      3200 |
+| Printer          |      2600 |
+| DVD Drive        |       900 |
+| Speaker          |       550 |
+| Key Bord         |       450 |
+| Refill cartridge |       350 |
+| MOUSE            |       250 |
+| Zip Drive        |       250 |
++------------------+-----------+
+9 rows in set (0.01 sec)
+
+mysql> select PRO_NAME, PRO_PRICE from product order by PRO_PRICE asc limit 1;
++-----------+-----------+
+| PRO_NAME  | PRO_PRICE |
++-----------+-----------+
+| Zip Drive |       250 |
++-----------+-----------+
+1 row in set (0.00 sec)
+
+mysql> select avg(PRO_PRICE) as AVERAGE_PRICE, PRO_COM from product group by PRO_COM;
++---------------+---------+
+| AVERAGE_PRICE | PRO_COM |
++---------------+---------+
+|          3200 |      15 |
+|           500 |      16 |
+|           250 |      14 |
+|          5000 |      11 |
+|           575 |      12 |
+|          1475 |      13 |
++---------------+---------+
+6 rows in set (0.01 sec)
+
+mysql> select avg(totle) as AVERAGE_TOTLE from product;
+ERROR 1054 (42S22): Unknown column 'totle' in 'field list'
+mysql> select avg(PRO_PRICE) as AVERAGE_TOTLE from product;
++--------------------+
+| AVERAGE_TOTLE      |
++--------------------+
+| 1505.5555555555557 |
++--------------------+
+1 row in set (0.00 sec)
